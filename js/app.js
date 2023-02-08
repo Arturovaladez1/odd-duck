@@ -20,7 +20,7 @@ function Store(name, fileExtension = 'jpg') {
 }
 
 // Instances of store
-if (!localStorage.getItem('AllProducts')){
+if (!localStorage.getItem('allProducts')){
   let bag = new Store('bag');
   let banana = new Store('banana');
   let bathroom = new Store('bathroom');
@@ -46,16 +46,18 @@ if (!localStorage.getItem('AllProducts')){
 }
 else //meaning there is local storage
 {
-  let data = localStorage.getItem('AllProductsToStorage');
+  let data = localStorage.getItem('allProducts');
   allProducts = JSON.parse(data);
+  console.log(allProducts);
 }
 // Local storage code////////
 
 // pack items into shed CODE into shed
 function storeProduct(){
   let stringifiedProducts = JSON.stringify(allProducts);
-  localStorage.setItem('AllProductsToStorage', stringifiedProducts);
+  localStorage.setItem('allProducts', stringifiedProducts);
 }
+// console.log(allProducts);
 
 
 // Put items into shed CODE into shed
@@ -72,7 +74,7 @@ function renderProducts() {
 
   while (indexArray.length < 6) {
     let ranNum = selectRandomProduct();
-    console.log(ranNum);
+    // console.log(ranNum);
     if (!indexArray.includes(ranNum)) {
       indexArray.push(ranNum);
     }
@@ -82,7 +84,7 @@ function renderProducts() {
   let product2 = indexArray.shift();
   let product3 = indexArray.shift();
 
-  console.log(product1, product2, product3);
+  // console.log(product1, product2, product3);
 
   // //while loop 
   // let product1 = selectRandomProduct();
@@ -98,7 +100,7 @@ function renderProducts() {
   //  }
 
    
-  console.log(product1, product2, product3);
+  // console.log(product1, product2, product3);
 
   // change the images displayed in the DOM
   imageOne.src = allProducts[product1].src;
@@ -110,9 +112,7 @@ function renderProducts() {
   allProducts[product1].views++;
   allProducts[product2].views++;
   allProducts[product3].views++;
-  allProducts[product1].likes++;
-  allProducts[product2].likes++;
-  allProducts[product3].likes++;
+
 }
 
 function renderResults() {
@@ -129,7 +129,7 @@ function renderResults() {
 
 // Event Handler
 function handleClick(event) {
-  console.log(event.target.alt);
+  // console.log(event.target.alt);
   numberOfMatches++;
   let clickedProduct = event.target.alt;
   for (let i = 0; i < allProducts.length; i++) {
