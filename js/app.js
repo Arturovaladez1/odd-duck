@@ -20,28 +20,47 @@ function Store(name, fileExtension = 'jpg') {
 }
 
 // Instances of store
-let bag = new Store('bag');
-let banana = new Store('banana');
-let bathroom = new Store('bathroom');
-let boots = new Store('boots');
-let breakfast = new Store('breakfast');
-let bubblegum = new Store('bubblegum');
-let chair = new Store('chair');
-let cthulhu = new Store('cthulhu');
-let dogduck = new Store('dog-duck');
-let dragon = new Store('dragon');
-let pen = new Store('pen');
-let petsweep = new Store('pet-sweep');
-let scissors = new Store('scissors');
-let shark = new Store('shark');
-let sweep = new Store('sweep', 'png');
-let tauntaun = new Store('tauntaun');
-let unicorn = new Store('unicorn');
-let watercan = new Store('water-can');
-let wineglass = new Store('wine-glass');
+if (!localStorage.getItem('AllProducts')){
+  let bag = new Store('bag');
+  let banana = new Store('banana');
+  let bathroom = new Store('bathroom');
+  let boots = new Store('boots');
+  let breakfast = new Store('breakfast');
+  let bubblegum = new Store('bubblegum');
+  let chair = new Store('chair');
+  let cthulhu = new Store('cthulhu');
+  let dogduck = new Store('dog-duck');
+  let dragon = new Store('dragon');
+  let pen = new Store('pen');
+  let petsweep = new Store('pet-sweep');
+  let scissors = new Store('scissors');
+  let shark = new Store('shark');
+  let sweep = new Store('sweep', 'png');
+  let tauntaun = new Store('tauntaun');
+  let unicorn = new Store('unicorn');
+  let watercan = new Store('water-can');
+  let wineglass = new Store('wine-glass');
 
-// array of products
-allProducts = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogduck, dragon, pen, petsweep, scissors, shark, sweep, tauntaun, unicorn, watercan, wineglass];
+  // array of products
+  allProducts = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogduck, dragon, pen, petsweep, scissors, shark, sweep, tauntaun, unicorn, watercan, wineglass];
+}
+else //meaning there is local storage
+{
+  let data = localStorage.getItem('AllProductsToStorage');
+  allProducts = JSON.parse(data);
+}
+// Local storage code////////
+
+// pack items into shed CODE into shed
+function storeProduct(){
+  let stringifiedProducts = JSON.stringify(allProducts);
+  localStorage.setItem('AllProductsToStorage', stringifiedProducts);
+}
+
+
+// Put items into shed CODE into shed
+// function GrabProducts()
+// JSON.Parse(allProducts)
 
 // console.log(allProducts);
 
@@ -65,7 +84,7 @@ function renderProducts() {
 
   console.log(product1, product2, product3);
 
-  // lab11 while loop 
+  // //while loop 
   // let product1 = selectRandomProduct();
   // let product2 = selectRandomProduct();
   // let product3 = selectRandomProduct();
@@ -78,8 +97,8 @@ function renderProducts() {
   //   product3 = selectRandomProduct();
   //  }
 
-  // } 
-  // console.log(product1, product2, product3);
+   
+  console.log(product1, product2, product3);
 
   // change the images displayed in the DOM
   imageOne.src = allProducts[product1].src;
@@ -96,15 +115,17 @@ function renderProducts() {
   allProducts[product3].likes++;
 }
 
-// function renderResults() {
-  // let results = document.querySelector('ul');
-  // for (let i = 0; i < allProducts.length; i++) {
-  //   let li = document.createElement('li');
-  //   li.textContent = `${allProducts[i].name} had ${allProducts[i].views} views and ${allProducts[i].likes} likes.`;
-  //   results.appendChild(li);
+function renderResults() {
+  let results = document.querySelector('ul');
+  for (let i = 0; i < allProducts.length; i++) {
+    let li = document.createElement('li');
+    li.textContent = `${allProducts[i].name} had ${allProducts[i].views} views and ${allProducts[i].likes} likes.`;
+    results.appendChild(li);
 
-  // }
-
+  }
+  storeProduct();
+  renderChart();
+}
 
 // Event Handler
 function handleClick(event) {
@@ -122,8 +143,8 @@ function handleClick(event) {
 
   } else {
     myContainer.removeEventListener('click', handleClick);
-    // myButton.addEventListener('click', renderResults);
-    renderChart();
+    myButton.addEventListener('click', renderResults);
+    
   }
 }
 
@@ -147,21 +168,22 @@ for (let i =0; i < allProducts.length; i++){
       labels: productNames,
       datasets: [
         {
-        label: '# of votes',
-        data: likes,
+        label: '# of views',
+        data: views,
         borderWidth: 1,
         backgroundColor: [
           '#b6e31c'
         ]
         },
+
         {
-          label: '# of views',
-          data: views,
-          borderWidth: 1,
-          backgroundColor: [
-            '#009CBC'
+        label: '# of votes',
+        data: likes,
+        borderWidth: 1,
+        backgroundColor: [
+          '#009CBC'
           ]
-          }
+        }
           // {
           //   label: 'productNames',
           //   data: productNames,
