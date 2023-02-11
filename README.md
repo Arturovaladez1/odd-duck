@@ -2,7 +2,7 @@
 
 ## Odd Duck Poject
 
-Please vote to help Odd Duck on their journey to develop the next innovati mveasterpeice.
+Please vote to help Odd Duck on their journey to develop the next innovati masterpeice.
 
 ## Light House Report
 
