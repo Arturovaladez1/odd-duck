@@ -14,7 +14,14 @@ main h1 {
   color: #e3491c;
   font-size: 50px;
   text-align: center;
+  padding: 8px;
   margin-top: 10rem;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 900;
+  background: url(rubberDuck.jpg);
+  
+  
   
 
 }
@@ -65,7 +72,7 @@ div#button{
 ul{
   background-color:#b6e31c;
   padding: .75rem;
-  width:max-content;
+  width: max-content;
   font-size: 16px;
 }
 
